@@ -1,3 +1,7 @@
+// Array de colores de fondo posibles
+const colors = ["#260934", "#760949", "#8da3e7", "#e5efd3", "#ffaef4", "#e73b78", "#d7fff5"];
+
+
 // Espera a que la ventana (página) se cargue completamente antes de ejecutar el código
 window.onload = function() {
     
@@ -16,7 +20,7 @@ window.onload = function() {
         
                 // Muestra la cita en el elemento HTML con el ID "quotes"
                 const quoteElement = document.getElementById("quotes");
-                quoteElement.textContent = quoteText;
+                quoteElement.textContent = `"${quoteText}"`;
         
                 // Muestra el autor de la cita en el elemento HTML con el ID "author"
                 const authorElement = document.getElementById("author");
@@ -32,31 +36,48 @@ window.onload = function() {
                 console.error('Error:', error);
             });
     }
-    
-    // Función para cambiar el color de fondo del body
-    function changeBackgroundColor() {
-        // Array de colores de fondo posibles
-        const colors = ["#ff5733", "#33ff57", "#5733ff", "#ff33a6", "#a633ff"];
-        
-        // Obtiene un color aleatorio del array
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        
-        // Cambia el color de fondo del body
-        document.body.style.backgroundColor = randomColor;
-    }
-    
-    // Genera una cita cuando se carga la página
-    generateQuote();
-    
-    // Agrega un evento de clic al botón con el ID "generate"
-    const generateButton = document.getElementById("generate");
-    generateButton.addEventListener('click', function() {
-        // Genera una nueva cita al hacer clic en el botón
+
+        // Genera una cita cuando se carga la página
         generateQuote();
+    
+        // Agrega un evento de clic al botón con el ID "generate"
+        const generateButton = document.getElementById("generate");
+        generateButton.addEventListener('click', function() {
+            // Genera una nueva cita al hacer clic en el botón
+            generateQuote();
+            
+            // Cambia el fondo del body al hacer clic en el botón
+            changeBackgroundColor(); 
+        });
         
-        // Cambia el fondo del body al hacer clic en el botón
-        changeBackgroundColor(); 
-    });
+    
+// Función para cambiar el color de fondo del body
+function changeBackgroundColor() {
+    
+    // Obtiene el color siguiente de la lista
+    const nextColor = colors.shift();
+
+    // Cambia el color de fondo del body
+    document.body.style.backgroundColor = nextColor;
+
+    // Añade el primer color al final de la lista
+    colors.push(colors[0]);
+}
+
+
+
+// // Función para cambiar el color de fondo del body de forma aleatoria
+// function changeBackgroundColor() {
+
+//     // Obtiene un color aleatorio del array
+//     const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+//     // Cambia el color de fondo del body
+//     document.body.style.backgroundColor = randomColor;
+// }
+
+    
+
 }
 
 
